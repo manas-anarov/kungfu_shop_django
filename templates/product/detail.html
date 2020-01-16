@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<div class="container">
+	<h1>{{ object.title }}</h1>
+	Description: <b>{{ object.desc }}</b><br>
+	Price: <b>{{ object.price }} $</b><br><br>
+	<img src="{{ MEDIA_URL }}{{ object.image.url }}"  alt="img"><br><br>
+	<a href="{% url 'core:create-cart' object.slug %}"><button type="button" class="btn btn-success">+ To Cart</button></a>
+</div>
+{% endblock content %}

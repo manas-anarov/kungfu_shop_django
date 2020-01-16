@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block head_title %}{% endblock %}</title>
+    {% block extra_head %}
+    {% endblock %}
+    
+
+
+{% load static %}
+
+
+<link rel="stylesheet" href='{% static "/bootstrap/css/bootstrap.min.css" %}' integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+
+<script src='{% static "/bootstrap/js/bootstrap.min.js" %}' integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+
+
+
+  </head>
+  <body>
+
+
+<ul class="nav justify-content-center">
+  <li class="nav-item">
+    <a class="nav-link active" href="{%url 'product:list-product' %}">KungFu Shop</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'product:summary' %}">{% load cart_item %} {% get_cart_item %} | Cart</a>
+
+  </li>
+  {% if request.user.is_authenticated %}
+  <li class="nav-item">
+    <a class="nav-link" href="{%url 'account_logout' %}">Logout</a>
+  </li>
+  {% else %}
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'account_signup'%}">Register</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{% url 'account_login'%}">Login</a>
+  </li>
+  {% endif %}
+</ul>
+
+
+    <div class="container">
+    {% block body %}
+
+    {% if messages %}
+    <div>
+      <strong>Messages:</strong>
+      <ul>
+        {% for message in messages %}
+        <li>{{message}}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    <hr>
+    {% endif %}
+
+    
+
+
+    {% block content %}
+    {% endblock %}
+
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+
+    </div>
+  </body>
+</html>

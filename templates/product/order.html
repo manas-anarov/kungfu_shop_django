@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+  <main>
+    <div class="container">
+      
+<h3><center>Order Final</center></h3>
+<table class="table table-striped table-dark">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+      <th scope="col">Price</th>
+    </tr>
+  </thead>
+  <tbody>
+
+
+     {% for order_item in object.carts.all %}
+        <tr>
+            <th scope="row">{{ forloop.counter }}</th>
+            <td>{{ order_item.product.title }}</td>
+            <td>{{ order_item.product.desc|slice:"50" }}</td>
+            <td>{{ order_item.product.price }}$</td>
+            
+        </tr>
+    {% endfor %}
+
+
+        <tr>
+            <td colspan="3"><b>Order Total</b></td>
+            <td><b>{{ object.get_sum }} $</b></td>
+        </tr>
+     
+
+  </tbody>
+</table>
+
+<a class='btn btn-danger float-left' href='/clear/'>Clear</a>
+<a class='btn btn-success float-right ml-2' href='/pay/'>Pay visa</a>
+
+
+
+
+
+
+
+{% endblock content %}
